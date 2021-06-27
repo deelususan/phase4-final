@@ -9,5 +9,5 @@ import com.ecom.web.entity.Product;
 public interface ProductRepository extends JpaRepository<Product,Long> {
 	
 	List<Product> findByCusine(String cusine);
-
+//	List<Product> findById(Long p_id);
 }

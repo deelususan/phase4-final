@@ -18,12 +18,11 @@ import com.ecom.web.service.ProductService;
 
 @RestController
 
-
 public class ProductController {
 
 	@Autowired
 	private ProductService productservice;
-//	@CrossOrigin(origins="*",allowedHeaders="*")
+	@CrossOrigin(origins="*",allowedHeaders="*")
 
 	
 	// Get all products
@@ -31,6 +30,12 @@ public class ProductController {
 	@GetMapping("/products")
 	public List<Product> getAllProducts() {
 		return productservice.geAllMyProducts();
+
+	}
+	
+	@GetMapping("/products/details/{p_id}")
+	public Product getOneProduct(@PathVariable("p_id") long prodid) {
+		return productservice.getOneMyProduct(prodid);
 
 	}
 
@@ -42,11 +47,13 @@ public class ProductController {
 		 
 	
 
-	// Find Products by Category Name
-	@GetMapping("/products/{cusine}")
-	public List<Product> getAllProductsByCusine(@PathVariable String cusine) {
-		return productservice.getProductbyMyCusine(cusine);
-	}
+		
+		  // Find Products by Category Name
+		  
+		  @GetMapping("/products/{cusine}") public List<Product>
+		  getAllProductsByCusine(@PathVariable String cusine) { return
+		  productservice.getProductbyMyCusine(cusine); }
+		 
 
 	// Update a Product
 	@PutMapping("/updateproduct")
@@ -55,8 +62,15 @@ public class ProductController {
 	}
 
 	// Delete a Product by Id
-	@DeleteMapping("/deleteproduct/{p_id}")
+	@DeleteMapping("/products/deleteproduct/{p_id}")
 	public String deleteProductById(@PathVariable("p_id") long prodid) {
 		return productservice.deleteMyProductById(prodid);
 	}
+	
+	// Update a Product by Id
+	@PutMapping("/products/updateproducts")
+	public Product updateProductById(Product product) {
+		return productservice.updateMyProductById( product);
+	}
 }
+
